@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class DependencyInjectorTests {
 
     @Test
-    public void add_whenClassAdded_classIsAccessible() {
+    public void add_whenClassAdded_classIsAccessible() throws AlreadyAddedException {
         DependencyInjector dependencyInjector = new DependencyInjector();
         SimpleClassWithAnnotation simpleClass = dependencyInjector.add(new SimpleClassWithAnnotation());
         Assertions.assertNotNull(simpleClass);

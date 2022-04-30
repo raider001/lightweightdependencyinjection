@@ -19,7 +19,8 @@ public class DependencyInjector {
      * @param obj The object to be used in the dependency injection framework
      * @return The added object.
      */
-    public <T> T add(T obj) {
+    public <T> T add(T obj) throws AlreadyAddedException {
+        if(registeredClasses.containsKey(obj.getClass())) throw new AlreadyAddedException(obj.getClass());
         registeredClasses.putIfAbsent(obj.getClass(), obj);
         return obj;
     }
@@ -27,7 +28,7 @@ public class DependencyInjector {
     /**
      * Injects a class into the dependency injector. An exception will be thrown if one of the following rules are broken:
      * <ul>
-     *     <li>The class must have exactly one DI annotation.</li>
+     *     <li>The class must have exactly one DI annotation, or a single constructor</li>
      *     <li>The dependencies this class has must have already been injected.</li>
      * </ul>
      * @param clz The class to instantiate and allow for future injections
