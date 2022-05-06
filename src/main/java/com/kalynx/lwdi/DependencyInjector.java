@@ -75,6 +75,12 @@ public class DependencyInjector {
 
     }
 
+    /**
+     * Provides a way to retrieve a dependency that has been injected. If the dependency does not exist, it will return null.
+     * @param dependency
+     * @param <T>
+     * @return The instantiated dependency
+     */
     @SuppressWarnings("unchecked")
     public <T> T getDependency(Class<T> dependency) {
         // Warning suppressed. Cast exception no possible due to how information is stored in a map.
