@@ -1,7 +1,6 @@
 package com.kalynx.lwdi;
 
 import com.kalynx.lwdi.testclasses.*;
-import com.lazyproductions.lwdi.testclasses.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
