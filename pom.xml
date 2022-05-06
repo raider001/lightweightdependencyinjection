@@ -21,7 +21,7 @@
             <!-- Attach source jars-->
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>${version.plugin.source}</version>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <id>attach-source</id>
@@ -36,7 +36,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${version.plugin.javadoc}</version>
+                <version>3.4.0</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
