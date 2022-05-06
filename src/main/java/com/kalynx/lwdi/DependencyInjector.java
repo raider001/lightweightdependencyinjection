@@ -10,15 +10,17 @@ import java.util.stream.Collectors;
  * By injecting classes and objects into this class
  */
 public class DependencyInjector {
-    public Map<Class<?>, Object> registeredClasses = new HashMap<>();
+    private final Map<Class<?>, Object> registeredClasses = new HashMap<>();
 
     /**
      * Adds a pre-built dependency into the dependency injection framework.
      *
      * This can be particularily useful if you did not want other certain construction objects to be available throughout the system.
      * @param obj The object to be used in the dependency injection framework
+     * @param <T> The added object
      * @return The added object.
      */
+
     public <T> T add(T obj) throws AlreadyAddedException {
         if(registeredClasses.containsKey(obj.getClass())) throw new AlreadyAddedException(obj.getClass());
         registeredClasses.putIfAbsent(obj.getClass(), obj);
@@ -31,6 +33,7 @@ public class DependencyInjector {
      *     <li>The class must have exactly one DI annotation, or a single constructor</li>
      *     <li>The dependencies this class has must have already been injected.</li>
      * </ul>
+     * @param <T> The instantiated object of the injected class.
      * @param clz The class to instantiate and allow for future injections
      * @return the instantiated class.
      */
