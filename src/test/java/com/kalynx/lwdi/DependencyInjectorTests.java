@@ -15,11 +15,25 @@ public class DependencyInjectorTests {
     }
 
     @Test
+    public void add_whenSameClassAddedTwice_ExceptionThrown() throws AlreadyAddedException {
+        DependencyInjector dependencyInjector = new DependencyInjector();
+        SimpleClassWithAnnotation simpleClass = dependencyInjector.add(new SimpleClassWithAnnotation());
+        Assertions.assertThrows(AlreadyAddedException.class, () -> dependencyInjector.add(simpleClass));
+    }
+
+    @Test
     public void inject_whenClassAddedWithNoDIAnnotation_classRegistered() throws DependencyInjectionException {
         DependencyInjector dependencyInjector = new DependencyInjector();
         SimpleClassWithoutAnnotation obj = dependencyInjector.inject(SimpleClassWithoutAnnotation.class);
         Assertions.assertNotNull(dependencyInjector.getDependency(SimpleClassWithoutAnnotation.class));
         Assertions.assertEquals(obj, dependencyInjector.getDependency(SimpleClassWithoutAnnotation.class));
+    }
+
+    @Test
+    public void inject_whenSameClassAddedTwice_classIsAccessible() throws DependencyInjectionException {
+        DependencyInjector dependencyInjector = new DependencyInjector();
+        SimpleClassWithAnnotation simpleClass = dependencyInjector.inject(SimpleClassWithAnnotation.class);
+        Assertions.assertThrows(AlreadyAddedException.class, () -> dependencyInjector.add(simpleClass));
     }
 
     @Test

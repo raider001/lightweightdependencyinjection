@@ -33,19 +33,16 @@ public class DependencyInjector {
      * </ul>
      * @param clz The class to instantiate and allow for future injections
      * @return the instantiated class.
-     * @throws DependencyInjectionException
      */
     public <T> T inject(Class<T> clz) throws DependencyInjectionException {
 
         if(registeredClasses.get(clz) != null)  throw new AlreadyAddedException(clz);
 
         // We know this is the constructor type because is was derived directly from clz, which must return an instance of T when created.
-        //noinspection unchecked
         List<Constructor<T>> constructors  = Arrays.stream((Constructor<T>[])clz.getConstructors()).filter(ctr -> ctr.getAnnotation(DI.class) != null).collect(Collectors.toList());
 
 
         if(constructors.isEmpty()) {
-            //noinspection unchecked
             constructors = Arrays.stream((Constructor<T>[]) clz.getConstructors()).toList();
             if(constructors.size() > 1) throw new TooManyConstructorsException(clz);
         }
@@ -77,13 +74,11 @@ public class DependencyInjector {
 
     /**
      * Provides a way to retrieve a dependency that has been injected. If the dependency does not exist, it will return null.
-     * @param dependency
-     * @param <T>
+     * @param dependency The instantiated dependency to retrieve
+     * @param <T> The type of dependency to retrieve
      * @return The instantiated dependency
      */
-    @SuppressWarnings("unchecked")
     public <T> T getDependency(Class<T> dependency) {
-        // Warning suppressed. Cast exception no possible due to how information is stored in a map.
         return (T) registeredClasses.get(dependency);
     }
 
