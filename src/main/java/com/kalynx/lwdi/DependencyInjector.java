@@ -1,4 +1,4 @@
-package com.lazyproductions.lwdi;
+package com.kalynx.lwdi;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

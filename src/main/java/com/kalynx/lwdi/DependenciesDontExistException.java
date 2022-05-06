@@ -1,4 +1,4 @@
-package com.lazyproductions.lwdi;
+package com.kalynx.lwdi;
 
 public class DependenciesDontExistException extends DependencyInjectionException {
 

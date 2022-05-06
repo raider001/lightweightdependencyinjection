@@ -1,4 +1,4 @@
-package com.lazyproductions.lwdi.testclasses;
+package com.kalynx.lwdi.testclasses;
 
 public class SimpleClassWithoutAnnotation {
 

@@ -10,7 +10,7 @@ It uses reflection to provide dependency injection capabilities in Java.
 
 ## SimpleClass
 ```
-import com.lazyproductions.lwdi.DI;
+import DI;
 
 public class SimpleClass {
 
@@ -41,8 +41,8 @@ public class ComplexClass {
 
 ## Main Applicaiton
 ```
- import com.lazyproductions.lwdi.DependencyInjector;
- import com.lazyproductions.lwdi.DependencyInjectionException;
+ import DependencyInjector;
+ import DependencyInjectionException;
  public class Main {
     public static void main(String[] args) {
       DependencyInjector di = new DependencyInjector();

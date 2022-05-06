@@ -1,6 +1,6 @@
-package com.lazyproductions.lwdi.testclasses;
+package com.kalynx.lwdi.testclasses;
 
-import com.lazyproductions.lwdi.DI;
+import com.kalynx.lwdi.DI;
 
 public class MultiConstructorWithAnnotation {
 
