@@ -20,6 +20,12 @@
         <url>https://github.com/raider001/lightweightdependencyinjection</url>
         <tag>HEAD</tag>
     </scm>
+    <developers>
+        <developer>
+            <id>raider00321</id>
+            <name>raider00321</name>
+        </developer>
+    </developers>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -94,18 +100,5 @@
             <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.4.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>${gpg-plugin-version}</version>
-        </dependency>
-
     </dependencies>
 </project>
