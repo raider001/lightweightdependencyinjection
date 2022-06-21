@@ -6,6 +6,15 @@ It is intended to be light weight in the sense that it holds no additional depen
 
 It uses reflection to provide dependency injection capabilities in Java.
 
+# Maven setup
+```
+<dependency>
+  <groupId>com.kalynx</groupId>
+  <artifactId>lwdi</artifactId>
+  <version>0.9</version>
+</dependency>
+```
+
 # Usage
 
 ## SimpleClass
