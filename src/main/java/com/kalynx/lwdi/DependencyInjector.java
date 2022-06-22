@@ -28,6 +28,46 @@ public class DependencyInjector {
     }
 
     /**
+     * The abstraction or common interface for dependency injection.
+     * @param clzInterface
+     * @param object
+     * @param <T>
+     */
+    public <T, V> T add(Class<T> clzInterface, T object) throws DependencyInjectionException {
+
+        if(registeredClasses.get(clzInterface) != null)  throw new AlreadyAddedException(clzInterface);
+
+        if(!clzInterface.isInterface()) {
+            throw new NotAInterfaceException(clzInterface);
+        }
+
+        registeredClasses.put(clzInterface, object);
+
+        return object;
+    }
+
+    /**
+     *
+     * Injects a interface based dependency injection to allow swappable concrete objects.
+     * @param clzInterface
+     * @param actual
+     * @param <T>
+     * @return
+     */
+    public <T, V extends T> T inject(Class<T> clzInterface, Class<V> actual) throws DependencyInjectionException {
+
+        if(registeredClasses.get(clzInterface) != null)  throw new AlreadyAddedException(clzInterface);
+
+        if(!clzInterface.isInterface()) {
+            throw new NotAInterfaceException(clzInterface);
+        }
+
+        T newObject =  objectBuilder(actual);
+        registeredClasses.put(clzInterface,newObject);
+        return newObject;
+    }
+
+    /**
      * Injects a class into the dependency injector. An exception will be thrown if one of the following rules are broken:
      * <ul>
      *     <li>The class must have exactly one DI annotation, or a single constructor.</li>
@@ -39,10 +79,15 @@ public class DependencyInjector {
      * @throws DependencyInjectionException is thrown when one of the rules above has been broken.
      */
     public <T> T inject(Class<T> clz) throws DependencyInjectionException {
-
         if(registeredClasses.get(clz) != null)  throw new AlreadyAddedException(clz);
+        T newObject =  objectBuilder(clz);
+        registeredClasses.put(clz,newObject);
+        return newObject;
 
-        // We know this is the constructor type because is was derived directly from clz, which must return an instance of T when created.
+    }
+
+    private <T> T objectBuilder(Class<T> clz) throws DependencyInjectionException {
+        // We know this is the constructor type because it was derived directly from clz, which must return an instance of T when created.
         List<Constructor<T>> constructors  = Arrays.stream((Constructor<T>[])clz.getConstructors()).filter(ctr -> ctr.getAnnotation(DI.class) != null).collect(Collectors.toList());
 
 
@@ -50,8 +95,6 @@ public class DependencyInjector {
             constructors = Arrays.stream((Constructor<T>[]) clz.getConstructors()).toList();
             if(constructors.size() > 1) throw new TooManyConstructorsException(clz);
         }
-
-
 
         if(constructors.size() != 1) throw new DIAnnotationException(clz);
 
@@ -66,14 +109,12 @@ public class DependencyInjector {
 
         }
         try {
-            T newInstance = selectedCtor.newInstance(params);
-            registeredClasses.put(clz, newInstance);
-            return newInstance;
+            return selectedCtor.newInstance(params);
+
         } catch (InstantiationException|IllegalAccessException|InvocationTargetException e) {
             e.printStackTrace();
             return null;
         }
-
     }
 
     /**

@@ -22,6 +22,26 @@ public class DependencyInjectorTests {
     }
 
     @Test
+    public void add_interfaceAndObjectOk_classIsAccessible() throws DependencyInjectionException {
+        DependencyInjector dependencyInjector = new DependencyInjector();
+        dependencyInjector.add(SimpleInterface.class, new ClassWithInterface());
+    }
+
+    @Test
+    public void add_interfaceAndObjectOkButAlreadyAdded_throwAlreadyAddedException() throws DependencyInjectionException {
+        DependencyInjector dependencyInjector = new DependencyInjector();
+        dependencyInjector.add(SimpleInterface.class, new ClassWithInterface());
+        Assertions.assertThrows(AlreadyAddedException.class, () -> dependencyInjector.add(SimpleInterface.class, new ClassWithInterface()));
+    }
+
+    @Test
+    public void add_InvalidInterfaceButObjectOk_throwObjectNotAssignableException() throws DependencyInjectionException {
+        DependencyInjector dependencyInjector = new DependencyInjector();
+        dependencyInjector.add(SimpleInterface.class, new ClassWithInterface());
+        Assertions.assertThrows(NotAInterfaceException.class, () -> dependencyInjector.add(ClassWithInterface.class, new ClassWithInterface()));
+    }
+
+    @Test
     public void inject_whenClassAddedWithNoDIAnnotation_classRegistered() throws DependencyInjectionException {
         DependencyInjector dependencyInjector = new DependencyInjector();
         SimpleClassWithoutAnnotation obj = dependencyInjector.inject(SimpleClassWithoutAnnotation.class);
@@ -94,4 +114,26 @@ public class DependencyInjectorTests {
         Assertions.assertEquals(sut, dependencyInjector.getDependency(MultiConstructorWithAnnotation.class));
 
     }
+
+    @Test
+    public void inject_classWithInterfaceReference() throws DependencyInjectionException {
+        DependencyInjector dependencyInjector = new DependencyInjector();
+        dependencyInjector.inject(SimpleInterface.class, ClassWithInterface.class);
+        Assertions.assertNotNull(dependencyInjector.getDependency(SimpleInterface.class));
+    }
+
+    @Test
+    public void inject_classWithInterfaceReferenceAlreadyAdded_throwsAlreadyAddedExceptionThrown() throws DependencyInjectionException {
+        DependencyInjector dependencyInjector = new DependencyInjector();
+        dependencyInjector.inject(SimpleInterface.class, ClassWithInterface.class);
+        Assertions.assertThrows(AlreadyAddedException.class, () -> dependencyInjector.inject(SimpleInterface.class, ClassWithInterface.class));
+    }
+
+    @Test
+    public void inject_classThatNotAnInterface_throwsSotAInterfaceException() throws DependencyInjectionException {
+        DependencyInjector dependencyInjector = new DependencyInjector();
+        dependencyInjector.inject(SimpleInterface.class, ClassWithInterface.class);
+        Assertions.assertThrows(NotAInterfaceException.class, () -> dependencyInjector.inject(ClassWithInterface.class, ClassWithInterface.class));
+    }
+
 }

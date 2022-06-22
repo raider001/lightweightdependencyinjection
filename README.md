@@ -19,8 +19,6 @@ It uses reflection to provide dependency injection capabilities in Java.
 
 ## SimpleClass
 ```
-import DI;
-
 public class SimpleClass {
 
 }
