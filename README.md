@@ -48,7 +48,7 @@ public class ComplexClass {
 }
 ```
 
-## Main Applicaiton
+## Main Application
 ```
  import DependencyInjector;
  import DependencyInjectionException;
