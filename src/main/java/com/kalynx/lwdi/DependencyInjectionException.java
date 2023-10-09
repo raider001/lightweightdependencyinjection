@@ -5,7 +5,7 @@ package com.kalynx.lwdi;
  */
 public abstract class DependencyInjectionException extends Exception {
     /**
-     *
+     *  A general exception for dependency injections.
      * @param message The message displayed in the exception.
      */
     public DependencyInjectionException(String message) {

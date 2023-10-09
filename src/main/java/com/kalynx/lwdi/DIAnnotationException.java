@@ -6,7 +6,7 @@ package com.kalynx.lwdi;
 public class DIAnnotationException extends DependencyInjectionException {
 
     /**
-     *
+     * An exception that fires when a DI Annotation is expected, but not provided.
      * @param offendingClass The class that caused the exception.
      */
     public DIAnnotationException(Class<?> offendingClass) {

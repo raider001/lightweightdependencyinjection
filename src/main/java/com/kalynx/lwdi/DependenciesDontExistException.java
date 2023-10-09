@@ -6,7 +6,7 @@ package com.kalynx.lwdi;
 public class DependenciesDontExistException extends DependencyInjectionException {
 
     /**
-     *
+     * This exception occurs when none of the required dependencies have not already been registered by the DI interface.
      * @param offendingClass The class that throw the exception
      * @param requiredDependency The dependency needing to be injected before the offending class.
      */

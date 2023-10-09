@@ -29,9 +29,12 @@ public class DependencyInjector {
 
     /**
      * The abstraction or common interface for dependency injection.
-     * @param clzInterface
-     * @param object
-     * @param <T>
+     * @param clzInterface The singleton class to retrieve from a central locaiton. This is used to retrieve the registered instance.
+     * @param object The instance of the class.
+     * @param <T> The type of class being created
+     * @param <V> The actual object.
+     * @return The given instance for future use if required after registration.
+     * @throws DependencyInjectionException Throws an appropriate dependency injection exception based on the issue found.
      */
     public <T, V> T add(Class<T> clzInterface, T object) throws DependencyInjectionException {
 
@@ -48,11 +51,13 @@ public class DependencyInjector {
 
     /**
      *
-     * Injects a interface based dependency injection to allow swappable concrete objects.
-     * @param clzInterface
-     * @param actual
-     * @param <T>
-     * @return
+     * Injects an interface based dependency injection to allow swappable concrete objects.
+     * @param clzInterface The interface being injected for reference
+     * @param actual The concrete implementation intended to be used
+     * @param <T> The Interface class type.
+     * @param <V> The concrete class that implements the interface
+     * @return The concrete class created.
+     * @throws DependencyInjectionException Throws an exception based on why the injection failed.
      */
     public <T, V extends T> T inject(Class<T> clzInterface, Class<V> actual) throws DependencyInjectionException {
 
@@ -64,6 +69,7 @@ public class DependencyInjector {
 
         T newObject =  objectBuilder(actual);
         registeredClasses.put(clzInterface,newObject);
+
         return newObject;
     }
 

@@ -6,10 +6,9 @@ package com.kalynx.lwdi;
 public class NotAInterfaceException extends DependencyInjectionException {
 
     /**
-     *
+     * An exception that occurs where a interface is expected.
      * @param offendingClass The class that throw the exception
-     * @param requiredDependency The dependency needing to be injected before the offending class.
-     */
+      */
     public NotAInterfaceException(Class<?> offendingClass) {
         super(offendingClass.getName() + " is not an interface.");
     }

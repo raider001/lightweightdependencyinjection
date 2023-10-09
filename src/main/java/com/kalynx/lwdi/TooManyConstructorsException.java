@@ -7,7 +7,8 @@ package com.kalynx.lwdi;
 public class TooManyConstructorsException extends DependencyInjectionException {
 
     /**
-     *
+     * An exception that occurs where a offending class has too many constructors
+     * and none defined for injection use.
      * @param offendingClass The offending class.
      */
     public TooManyConstructorsException(Class<?> offendingClass) {
