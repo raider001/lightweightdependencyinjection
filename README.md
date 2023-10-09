@@ -58,7 +58,6 @@ public class ComplexClass {
 }
 ```
 
-## Injecting an interface
 ## Main Application
 ```
  import DependencyInjector;
@@ -66,9 +65,16 @@ public class ComplexClass {
  public class Main {
     public static void main(String[] args) {
       DependencyInjector di = new DependencyInjector();
+      // Adding a class to the DI library.
       di.add(new SimpleClass());
+
+      // Using an interface as a reference
       di.add(SimpleInterface.class, new SimpleClass());
+
+      // Injecting a simple class with no dependencies.
       di.inject(DiClass.class);
+
+      // Injecting a complex class with dependencies previously added.
       di.inject(ComplexClass.class);
     }
  }
