@@ -11,7 +11,7 @@ It uses reflection to provide dependency injection capabilities in Java.
 <dependency>
   <groupId>com.kalynx</groupId>
   <artifactId>lwdi</artifactId>
-  <version>0.9</version>
+  <version>1.0</version>
 </dependency>
 ```
 
